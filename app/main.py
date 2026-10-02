@@ -3,13 +3,14 @@ import os
 
 def move_file(command: str) -> None:
     parts = command.split()
-    source = parts[1]
-    destination = parts[2]
 
-    # Якщо destination закінчується на /,
-    # файл має зберегти своє старе ім'я
+    if len(parts) != 3 or parts[0] != "mv":
+        return
+
+    _, source, destination = parts
+
     if destination.endswith("/"):
-        destination = destination + source.split("/")[-1]
+        destination += source.split("/")[-1]
 
     directories = destination.split("/")[:-1]
 
